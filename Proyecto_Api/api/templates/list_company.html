@@ -1,0 +1,64 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Django crud</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="{% static 'main.css' %}" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-4 offset-md-4 mt-4">
+          <h1 class="m-4 pb-4 pt-3 text-light">MY COMPANY</h1>
+          <form
+            action="{% url 'create_company' %}"
+            method="post"
+            class="formato card card-body"
+          >
+            {% csrf_token %}
+            <div class="mt-2">
+              <label for="name" class="form-label text-light">Nombre</label>
+              <input type="text" class="form-control" id="name" name="name" />
+            </div>
+            <div class="mt-3">
+              <label for="web" class="form-label text-light">website</label>
+              <input type="url" class="form-control" id="web" name="website" />
+            </div>
+            <div class="mt-3">
+              <label for="foundation" class="form-label text-light">foundation</label>
+              <input
+                type="datetime"
+                class="form-control"
+                id="foundation"
+                name="foundation"
+              />
+            </div>
+            <button type="submit" class="btn text-light m-4">Submit</button>
+          </form>
+          {% for company in companys %}
+          <div class="listcom m-4 card card-body">
+           <h4 class="m-1 text-light ">{{company.name}}</h4>
+           <h4 class="m-1 text-light ">{{company.website}}</h4>
+           <h4 class="mt-1 ms-1 me-1 text-light ">{{company.foundation}}</h4>
+           <form action="{% url 'delete_company' company.id %}" method="post">
+             {% csrf_token %}
+             <button class="btn but ms-1 mt-2 mb-2">eliminar</button>
+           </form>
+           </div>
+           {% empty %}
+           <!--propiedad que sirve cuando la lista esta vacia-->
+           <h1 class="text-light m-4">NO HAY COMPAÑIAS</h1>
+           {% endfor %}
+        </div>
+       
+      </div>
+    </div>
+  </body>
+</html>

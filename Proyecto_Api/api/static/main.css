@@ -1,0 +1,22 @@
+body{
+    background-image: linear-gradient( 109.6deg,  rgba(15,2,2,1) 11.2%, rgba(36,163,190,1) 91.1% );
+}
+.formato{
+    background-color: #252321 ;
+}
+.btn{  
+     background-color:#387695;
+}
+.btn:hover{
+    background-color:#0d4e6e;
+}
+.listcom{
+    background-color: #252321;
+}
+.but{
+    background-color:#9e3e11;
+}
+
+.but:hover{
+    background-color:#a02101;
+}
