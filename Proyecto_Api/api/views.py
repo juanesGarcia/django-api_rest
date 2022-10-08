@@ -6,6 +6,7 @@ from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
 import json
 from django.shortcuts import render,redirect
+from django.http import HttpResponse
 
 # Create your views here.
 
@@ -83,5 +84,23 @@ def delete_company(request,id):
     Company.objects.filter(id=id).delete()
     return redirect('/list/')
 
+
+      
+
+def view_update(request,id):
+    company=Company.objects.get(id=id)
+    
+    return render(request, 'update.html',{'com':company})
+
+def update_company(request,id):
+     company=Company.objects.get(id=id)
+     jd=request.POST
+     print(request.POST)
+     company.name=jd['name']
+     company.website=jd['website']
+     company.foundation=jd['foundation']
+     company.save()
+     return redirect('/list/')
+ 
 
 
